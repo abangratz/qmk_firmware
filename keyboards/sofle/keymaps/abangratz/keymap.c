@@ -1,5 +1,7 @@
 #include QMK_KEYBOARD_H
 
+#include "features/caps_word.h"
+
 enum sofle_layers {
     /* _M_XYZ = Mac Os, _W_XYZ = Win/Linux */
     _QWERTY,
@@ -29,11 +31,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |  `   |   Q  |   W  |   E  |   R  |   T  |                    |   Y  |   U  |   I  |   O  |   P  | <-   |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |  /   |   A  |   S  |   D  |   F  | LS/G |-------.    ,-------| RS/H |   J  |   K  |   L  |   ;  |  '   |
+ * |  /   |   A  |   S  |   D  |LT_L/F| LS/G |-------.    ,-------| RS/H |   J  |   K  |   L  |   ;  |  '   |
  * |------+------+------+------+------+------| Mute  |    | DT Pri|------+------+------+------+------+------|
  * |  [   |   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   \  |  ]   |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *            | TT 1 |      | LC_t |LG_t  | /LA_t   /       \ RA_t \  |RG_t  | RC_t |  -    |  =   |
+ *            | TT L | TT R | LC_t |LG_t  | /LA_t   /       \ RA_t \  |RG_t  | RC_t |  -    |  =   |
  *            |      |      | Tab  |Spc   |/  Esc  /         \Enter \ |Spc   | CAPS |       |      |
  *            `----------------------------------'           '------''---------------------------'
  */
@@ -41,7 +43,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_QWERTY] = LAYOUT(
   KC_F1,  KC_F2,   KC_F3,   KC_F4,     KC_F5,     KC_F6,                KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,  KC_F12,
   KC_GRV,   KC_Q,   KC_W,    KC_E,    KC_R,      KC_T,                   KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,  KC_BSPC,
-KC_SLSH,  KC_A,   KC_S,    KC_D,    KC_F,LSFT_T(KC_G),           LSFT_T(KC_H),    KC_J,    KC_K,    KC_L, KC_SCLN,  KC_QUOT,
+  KC_SLSH,  KC_A,   KC_S,    KC_D,LT(_LOWER,KC_F),LSFT_T(KC_G),           RSFT_T(KC_H),LT(_LOWER,KC_J),    KC_K,    KC_L, KC_SCLN,  KC_QUOT,
   KC_LBRC,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_MUTE, DT_PRNT  , KC_N,    KC_M, KC_COMM,  KC_DOT, KC_BSLS,  KC_RBRC,
   TT(_LOWER), TT(_RAISE),LCTL_T(KC_TAB),LGUI_T(KC_SPC),LALT_T(KC_ESC),RALT_T(KC_ENT),RGUI_T(KC_SPC), RCTL_T(KC_CAPS), KC_MINS, KC_EQL
 ),
@@ -49,9 +51,9 @@ KC_SLSH,  KC_A,   KC_S,    KC_D,    KC_F,LSFT_T(KC_G),           LSFT_T(KC_H),  
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |      |      |      |      |      |                    |      |   7  |   8  |   9  |      |      |
+ * |      |  !   |  @   |  /   |  \   |      |                    |      |   7  |   8  |   9  |      |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |      |      |      |      |      |-------.    ,-------|      |   4  |   5  |   6  |      |      |
+ * |      |  [   |  ]   |  (   |  )   |LShift|-------.    ,-------|RShift|   4  |   5  |   6  |      |      |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
  * |      |      |      |      |      |      |-------|    |-------|   0  |   1  |   2  |   3  |   .  |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
@@ -61,8 +63,8 @@ KC_SLSH,  KC_A,   KC_S,    KC_D,    KC_F,LSFT_T(KC_G),           LSFT_T(KC_H),  
  */
 [_LOWER] = LAYOUT(
  _______, _______, _______, _______, _______, _______,                    _______, _______, _______, _______,   _______,  _______,
- _______, _______, _______, _______, _______, _______,                    _______,   KC_7 ,   KC_8 ,   KC_9 ,   _______,  _______,
- _______, _______, _______, _______, _______, _______,                    _______,   KC_4 ,   KC_5 ,   KC_6 ,   _______,  _______,
+ _______, KC_EXLM,   KC_AT, KC_SLSH, KC_BSLS, _______,                    _______,   KC_7 ,   KC_8 ,   KC_9 ,   _______,  _______,
+ _______, KC_LBRC, KC_RBRC, KC_LPRN, KC_RPRN, KC_LSFT,                    KC_RSFT,   KC_4 ,   KC_5 ,   KC_6 ,   _______,  _______,
  _______, _______, _______, _______, _______, _______, _______, _______,  KC_0 ,   KC_1 ,   KC_2 ,   KC_3 ,   KC_DOT ,  _______,
                        _______, _______, _______, _______, _______,       _______, _______, _______, _______, _______
 ),
@@ -181,6 +183,7 @@ bool oled_task_user(void) {
 #endif
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (!process_caps_word(keycode, record)) { return false; }
     switch (keycode) {
         case KC_QWERTY:
             if (record->event.pressed) {

@@ -12,14 +12,14 @@ enum sofle_layers {
 
 enum custom_keycodes {
     KC_QWERTY = SAFE_RANGE,
-    KC_LOWER,
-    KC_RAISE,
-    KC_ADJUST,
-    KC_PRVWD,
-    KC_NXTWD,
     KC_LSTRT,
     KC_LEND,
-    KC_DLINE
+    KC_DLINE,
+    KC_RARROW,
+    KC_ELIXIRPIPE,
+    KC_DOUBLEARROW,
+    KC_LARROW,
+    KC_HASHROCKET
 };
 
 
@@ -31,7 +31,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |  `   |   Q  |   W  |   E  |   R  |   T  |                    |   Y  |   U  |   I  |   O  |   P  | <-   |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |  /   |   A  |   S  |LT_A/D|LT_L/F| LS/G |-------.    ,-------| RS/H |LT_L/J|   K  |   L  |   ;  |  '   |
+ * |  /   |   A  |   S  |LT_A/D|LT_L/F| LS/G |-------.    ,-------| RS/H |LT_L/J|LT_R/K|   L  |   ;  |  '   |
  * |------+------+------+------+------+------| Mute  |    | DT Pri|------+------+------+------+------+------|
  * |  [   |   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   \  |  ]   |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
@@ -43,7 +43,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_QWERTY] = LAYOUT(
   KC_F1,  KC_F2,   KC_F3,   KC_F4,     KC_F5,     KC_F6,                KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,  KC_F12,
   KC_GRV,   KC_Q,   KC_W,    KC_E,    KC_R,      KC_T,                   KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,  KC_BSPC,
-  KC_SLSH,  KC_A,   KC_S,LT(_ADJUST,KC_D),LT(_LOWER,KC_F),LSFT_T(KC_G),           RSFT_T(KC_H),LT(_LOWER,KC_J),    KC_K,    KC_L, KC_SCLN,  KC_QUOT,
+  KC_SLSH,  KC_A,   KC_S,LT(_ADJUST,KC_D),LT(_LOWER,KC_F),LSFT_T(KC_G),           RSFT_T(KC_H),LT(_LOWER,KC_J),LT(_RAISE,KC_K),    KC_L, KC_SCLN,  KC_QUOT,
   KC_LBRC,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_MUTE, DT_PRNT  , KC_N,    KC_M, KC_COMM,  KC_DOT, KC_BSLS,  KC_RBRC,
   TT(_LOWER), TT(_RAISE),LCTL_T(KC_TAB),LGUI_T(KC_SPC),LALT_T(KC_ESC),RALT_T(KC_ENT),RGUI_T(KC_SPC), RCTL_T(KC_CAPS), KC_MINS, KC_EQL
 ),
@@ -74,7 +74,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * | Esc  | Ins  | Pscr | Menu |      |      |                    |      | PWrd |  Up  | NWrd | DLine| Bspc |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | Tab  | LAt  | LCtl |LShift|      |      |-------.    ,-------|      | Left | Down | Rigth|  Del | Bspc |
+ * | Tab  | <=>  |  <-  |  ->  |  =>  | |>   |-------.    ,-------|      | Left | Down | Rigth|  Del | Bspc |
  * |------+------+------+------+------+------|  MUTE  |    |       |------+------+------+------+------+------|
  * |Shift | Undo |  Cut | Copy | Paste|      |-------|    |-------|      | LStr |      | LEnd |      | Shift|
  * `-----------------------------------------/       /     \      \-----------------------------------------'
@@ -84,9 +84,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_RAISE] = LAYOUT(
   _______, _______ , _______ , _______ , _______ , _______,                           _______,  _______  , _______,  _______ ,  _______ ,_______,
-  _______,  KC_INS,  KC_PSCR,   KC_APP,  XXXXXXX, XXXXXXX,                        KC_PGUP, KC_PRVWD,   KC_UP, KC_NXTWD,KC_DLINE, KC_BSPC,
-  _______, KC_LALT,  KC_LCTL,  KC_LSFT,  XXXXXXX, XXXXXXX,                       KC_PGDN,  KC_LEFT, KC_DOWN, KC_RGHT,  KC_DEL, KC_BSPC,
-  _______,KC_UNDO, KC_CUT, KC_COPY, KC_PASTE, XXXXXXX,  _______,       _______,  XXXXXXX, KC_LSTRT, XXXXXXX, KC_LEND,   XXXXXXX, _______,
+  _______,  KC_INS,  KC_PSCR,   KC_MINS,  KC_EQL, XXXXXXX,                        KC_PGUP, _______,   KC_UP, _______,KC_DLINE, KC_BSPC,
+  _______, KC_HASHROCKET,  KC_LARROW,  KC_RARROW,  KC_DOUBLEARROW, KC_ELIXIRPIPE,     _______,  KC_LEFT, KC_DOWN, KC_RGHT,  KC_DEL, KC_BSPC,
+  _______,KC_UNDO, KC_CUT, KC_COPY, KC_PASTE, XXXXXXX,  _______,       _______,  _______, KC_LSTRT, XXXXXXX, KC_LEND,   XXXXXXX, _______,
                          _______, _______, _______, _______, _______,       _______, _______, _______, _______, _______
 ),
 /* ADJUST
@@ -185,36 +185,31 @@ bool oled_task_user(void) {
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (!process_caps_word(keycode, record)) { return false; }
     switch (keycode) {
-        case KC_QWERTY:
-            if (record->event.pressed) {
-                set_single_persistent_default_layer(_QWERTY);
-            }
-            return false;
-        case KC_LOWER:
-            if (record->event.pressed) {
-                layer_on(_LOWER);
-                update_tri_layer(_LOWER, _RAISE, _ADJUST);
-            } else {
-                layer_off(_LOWER);
-                update_tri_layer(_LOWER, _RAISE, _ADJUST);
-            }
-            return false;
-        case KC_RAISE:
-            if (record->event.pressed) {
-                layer_on(_RAISE);
-                update_tri_layer(_LOWER, _RAISE, _ADJUST);
-            } else {
-                layer_off(_RAISE);
-                update_tri_layer(_LOWER, _RAISE, _ADJUST);
-            }
-            return false;
-        case KC_ADJUST:
-            if (record->event.pressed) {
-                layer_on(_ADJUST);
-            } else {
-                layer_off(_ADJUST);
-            }
-            return false;
+    case KC_ELIXIRPIPE:
+        if (record->event.pressed) {
+            SEND_STRING("|>");
+        }
+        break;
+    case KC_RARROW:
+        if (record->event.pressed) {
+            SEND_STRING("->");
+        }
+        break;
+    case KC_LARROW:
+        if (record->event.pressed) {
+            SEND_STRING("<-");
+        }
+        break;
+    case KC_DOUBLEARROW:
+        if (record->event.pressed) {
+            SEND_STRING("=>");
+        }
+        break;
+    case KC_HASHROCKET:
+        if (record->event.pressed) {
+            SEND_STRING("<=>");
+        }
+        break;
     }
     return true;
 }

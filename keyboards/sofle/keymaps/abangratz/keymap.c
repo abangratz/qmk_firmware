@@ -56,7 +56,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |  `   |   Q  |   W  |   F  |   P  |   B  |                    |   J  |   L  |   U  |   Y  |   ;  | <-   |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |  /   |   A  |   R  |LT_A/S|LT_L/T| LS/G |-------.    ,-------| RS/K |LT_L/N|LT_R/E|   I  |   O  |  '   |
+ * |  /   |   A  |LT_A/R|LT_R/S|LT_L/T| LS/G |-------.    ,-------| RS/K |LT_L/N|LT_R/E|LT_A/I|   O  |  '   |
  * |------+------+------+------+------+------| Mute  |    | DT Pri|------+------+------+------+------+------|
  * |  [   |   Z  |   X  |   C  |   D  |   V  |-------|    |-------|   K  |   H  |   ,  |   .  |   \  |  ]   |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
@@ -66,11 +66,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
 [_COLEMAK] = LAYOUT(
-  KC_F1,  KC_F2,   KC_F3,   KC_F4,     KC_F5,     KC_F6,                KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,  KC_F12,
-  KC_GRV,   KC_Q,   KC_W,    KC_F,    KC_P,      KC_B,                   KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN,  KC_BSPC,
-  KC_SLSH,  KC_A,   KC_R,LT(_ADJUST,KC_S),LT(_LOWER,KC_T),LSFT_T(KC_G),           RSFT_T(KC_M),LT(_LOWER,KC_N),LT(_RAISE,KC_E),    KC_I, KC_O,  KC_QUOT,
-  KC_LBRC,  KC_Z,   KC_X,    KC_C,    KC_D,    KC_V, KC_MUTE, DT_PRNT  , KC_K,    KC_H, KC_COMM,  KC_DOT, KC_BSLS,  KC_RBRC,
-  TT(_LOWER), TT(_RAISE),LCTL_T(KC_TAB),LGUI_T(KC_SPC),LALT_T(KC_ESC),RALT_T(KC_ENT),RGUI_T(KC_SPC), RCTL_T(KC_CAPS), KC_MINS, KC_EQL
+  KC_F1,    KC_F2,  KC_F3,           KC_F4,          KC_F5,          KC_F6,                KC_F7,       KC_F8,          KC_F9,          KC_F10,           KC_F11,  KC_F12,
+  KC_GRV,   KC_Q,   KC_W,            KC_F,           KC_P,           KC_B,                 KC_J,        KC_L,           KC_U,           KC_Y,             KC_SCLN, KC_BSPC,
+  KC_SLSH,  KC_A,   LT(_ADJUST,KC_R),LT(_RAISE,KC_S),LT(_LOWER,KC_T),LSFT_T(KC_G),         RSFT_T(KC_M),LT(_LOWER,KC_N),LT(_RAISE,KC_E),LT(_ADJUST,KC_I), KC_O,    KC_QUOT,
+  KC_LBRC,  KC_Z,   KC_X,            KC_C,           KC_D,           KC_V,KC_MUTE, DT_PRNT,KC_K,        KC_H,           KC_COMM,        KC_DOT,           KC_BSLS, KC_RBRC,
+              TT(_LOWER), TT(_RAISE),LCTL_T(KC_TAB),LGUI_T(KC_SPC),LALT_T(KC_ESC),RALT_T(KC_ENT),RGUI_T(KC_SPC), RCTL_T(KC_CAPS), KC_MINS, KC_EQL
 ),
 /* LOWER
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -80,7 +80,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |      |  [   |  ]   |  (   |  )   |LShift|-------.    ,-------|RShift|   4  |   5  |   6  |      |      |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
- * |      |      |      |      |      |      |-------|    |-------|   0  |   1  |   2  |   3  |   .  |      |
+ * |      |      |      |      |  *   |      |-------|    |-------|   0  |   1  |   2  |   3  |   .  |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
  *            | TT 1 |      | LC_t |LG_t  | /LA_t   /       \ RA_t \  |RG_t  | RC_t |  -    |  =   |
  *            |      |      | Tab  |Spc   |/  Esc  /         \Enter \ |Spc   | CAPS |       |      |
@@ -88,51 +88,51 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_LOWER] = LAYOUT(
  _______, _______, _______, _______, _______, _______,                    _______, _______, _______, _______,   _______,  _______,
- _______, KC_EXLM,   KC_AT, KC_SLSH, KC_BSLS, _______,                    _______,   KC_7 ,   KC_8 ,   KC_9 ,   _______,  _______,
- _______, KC_LBRC, KC_RBRC, KC_LPRN, KC_RPRN, KC_LSFT,                    KC_RSFT,   KC_4 ,   KC_5 ,   KC_6 ,   _______,  _______,
- _______, _______, _______, _______, _______, _______, _______, _______,  KC_0 ,   KC_1 ,   KC_2 ,   KC_3 ,   KC_DOT ,  _______,
+ XXXXXXX, KC_EXLM,   KC_AT, KC_SLSH, KC_BSLS, KC_TILD,                    XXXXXXX,   KC_7 ,   KC_8 ,   KC_9 ,   XXXXXXX,  XXXXXXX,
+ XXXXXXX, KC_LBRC, KC_RBRC, KC_LPRN, KC_RPRN, KC_LSFT,                    KC_RSFT,   KC_4 ,   KC_5 ,   KC_6 ,   XXXXXXX,  XXXXXXX,
+ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_ASTR, XXXXXXX, XXXXXXX, XXXXXXX,  KC_0 ,   KC_1 ,   KC_2 ,   KC_3 ,   KC_DOT ,  XXXXXXX,
                        _______, _______, _______, _______, _______,       _______, _______, _______, _______, _______
 ),
 /* RAISE
  * ,----------------------------------------.                    ,-----------------------------------------.
  * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | Esc  | Ins  | Pscr | Menu |      |      |                    | PgUp |      |  Up  |      | DLine| Bspc |
+ * |PrtScr| Ins  | <=>  |  -   |  =   |      |                    | PgUp | Home |  Up  | End  |      | Bspc |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | Tab  | <=>  |  <-  |  ->  |  =>  | |>   |-------.    ,-------| PgUp | Left | Down | Right|  Del | Bspc |
- * |------+------+------+------+------+------|  MUTE  |    |       |------+------+------+------+------+------|
- * |Shift | Undo |  Cut | Copy | Paste|      |-------|    |-------|      | LStr |      | LEnd |      | Shift|
+ * |      |  |>  |  <-  |  ->  |  =>  |LShift|-------.    ,-------|RShift| Left | Down | Right|  Del |      |
+ * |------+------+------+------+------+------|  MUTE |    |       |------+------+------+------+------+------|
+ * |      |      |  Cut | Copy |      |Paste |-------|    |-------| PgDn |      |      |      |      |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *            | LGUI | LAlt | LCTR |LOWER | /Enter  /       \Space \  |RAISE | RCTR | RAlt | RGUI |
- *            |      |      |      |      |/       /         \      \ |      |      |      |      |
- *            `----------------------------------'           '------''---------------------------'
+ *            | TT L | TT R | LC_t |LG_t  | /LA_t   /       \ RA_t \  |RG_t  | RC_t |  -    |  =   |
+ *            |      |      | Tab  |Spc   |/  Esc  /         \Enter \ |Spc   | CAPS |       |      |
+ *            `-----------------------------------'           '------''----------------------------'
  */
 [_RAISE] = LAYOUT(
   _______, _______ , _______ , _______ , _______ , _______,                           _______,  _______  , _______,  _______ ,  _______ ,_______,
-  _______,  KC_INS,  KC_PSCR,   KC_MINS,  KC_EQL, XXXXXXX,                        KC_PGUP, _______,   KC_UP, _______,KC_DLINE, KC_BSPC,
-  _______, KC_HASHROCKET,  KC_LARROW,  KC_RARROW,  KC_DOUBLEARROW, KC_ELIXIRPIPE,     KC_PGDN,  KC_LEFT, KC_DOWN, KC_RGHT,  KC_DEL, KC_BSPC,
-  _______,KC_UNDO, KC_CUT, KC_COPY, KC_PASTE, XXXXXXX,  _______,       _______,  _______, KC_LSTRT, XXXXXXX, KC_LEND,   XXXXXXX, _______,
+  KC_PSCR,  KC_INS , KC_HASHROCKET, KC_MINS,  KC_EQL, XXXXXXX,                        KC_PGUP, _______,   KC_UP, _______,KC_DLINE, KC_BSPC,
+  XXXXXXX, KC_ELIXIRPIPE,  KC_LARROW,  KC_RARROW,  KC_DOUBLEARROW, KC_LSFT,     KC_RSFT,  KC_LEFT, KC_DOWN, KC_RGHT,  KC_DEL, KC_BSPC,
+  XXXXXXX,XXXXXXX, KC_CUT, KC_COPY,XXXXXXX , KC_PASTE,  XXXXXXX,       XXXXXXX,  KC_PGDN, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX,
                          _______, _______, _______, _______, _______,       _______, _______, _______, _______, _______
 ),
 /* ADJUST
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * |      |      |      |      |      |      |                    |COLEMAK|QWERTY|      |      |      |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
+ * |RESET |      |      |      |      |      |                    |G_PGUP|G_PGDN|G_S_LE|G_S_RI|      |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |      |      |      |      |      |-------.    ,-------| G_C_J|G_C_AL| G_O  |G_C_AR|      |      |
+ * |      |      |      |      |      |      |-------.    ,-------| G_C_J|G_LEFT| G_O  |G_RGHT|      |      |
  * |------+------+------+------+------+------|  MUTE |    |       |------+------+------+------+------+------|
- * |      |      |      |      |      |      |-------|    |-------| G_C_K| PREV | PLAY | NEXT |      |      |
+ * |      |      |      |      |      |      |-------|    |-------| G_C_L| PREV | PLAY | NEXT |      |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *            | LGUI | LAlt | LCTR |LOWER | /Enter  /       \Space \  |RAISE | RCTR | RAlt | RGUI |
- *            |      |      |      |      |/       /         \      \ |      |      |      |      |
- *            `----------------------------------'           '------''---------------------------'
+ *            | TT L | TT R | LC_t |LG_t  | /LA_t   /       \ RA_t \  |RG_t  | RC_t |  -    |  =   |
+ *            |      |      | Tab  |Spc   |/  Esc  /         \Enter \ |Spc   | CAPS |       |      |
+ *            `-----------------------------------'           '------''----------------------------'
  */
   [_ADJUST] = LAYOUT(
-  _______ , _______,  _______ ,  _______ , _______, _______,                     KC_COLEMAK, KC_QWERTY, _______, _______, _______, _______,
-  RESET  , _______,_______,_______,_______,_______,                     G(KC_PGUP), G(KC_PGDN), G(S(KC_LEFT)), G(S(KC_RGHT)), _______, _______,
-  _______ , _______,_______, _______,    _______,  _______,                     G(C(KC_J)), G(KC_LEFT), G(KC_O), G(KC_RGHT), _______, _______,
-  _______ , _______, _______, _______,    _______,  _______, _______,     _______, G(C(KC_L)), KC_MPRV, KC_MPLY, KC_MNXT, _______, _______,
+  XXXXXXX , XXXXXXX,  XXXXXXX ,  XXXXXXX , XXXXXXX, XXXXXXX,                     KC_COLEMAK, KC_QWERTY, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  RESET  , XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,                     G(KC_PGUP), G(KC_PGDN), G(S(KC_LEFT)), G(S(KC_RGHT)), XXXXXXX, XXXXXXX,
+  XXXXXXX , XXXXXXX,XXXXXXX, XXXXXXX,    XXXXXXX,  XXXXXXX,                     G(C(KC_J)), G(KC_LEFT), G(KC_O), G(KC_RGHT), XXXXXXX, XXXXXXX,
+  XXXXXXX , XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX,  XXXXXXX, XXXXXXX,     XXXXXXX, G(C(KC_L)), KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX,
                    _______, _______, _______, _______, _______,     _______, _______, _______, _______, _______
   )
 };

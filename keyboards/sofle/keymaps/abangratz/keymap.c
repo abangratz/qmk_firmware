@@ -88,7 +88,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_LOWER] = LAYOUT(
  _______, _______, _______, _______, _______, _______,                    _______, _______, _______, _______,   _______,  _______,
- XXXXXXX, KC_EXLM,   KC_AT, KC_SLSH, KC_BSLS, KC_TILD,                    XXXXXXX,   KC_7 ,   KC_8 ,   KC_9 ,   XXXXXXX,  XXXXXXX,
+ XXXXXXX, KC_EXLM,   KC_AT, KC_SLSH, KC_BSLS, KC_TILD,                    XXXXXXX,   KC_7 ,   KC_8 ,   KC_9 ,   XXXXXXX,  _______,
  XXXXXXX, KC_LBRC, KC_RBRC, KC_LPRN, KC_RPRN, KC_LSFT,                    KC_RSFT,   KC_4 ,   KC_5 ,   KC_6 ,   XXXXXXX,  XXXXXXX,
  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_ASTR, XXXXXXX, XXXXXXX, XXXXXXX,  KC_0 ,   KC_1 ,   KC_2 ,   KC_3 ,   KC_DOT ,  XXXXXXX,
                        _______, _______, _______, _______, _______,       _______, _______, _______, _______, _______
@@ -108,11 +108,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *            `-----------------------------------'           '------''----------------------------'
  */
 [_RAISE] = LAYOUT(
-  _______, _______ , _______ , _______ , _______ , _______,                           _______,  _______  , _______,  _______ ,  _______ ,_______,
-  KC_PSCR,  KC_INS , KC_HASHROCKET, KC_MINS,  KC_EQL, XXXXXXX,                        KC_PGUP, _______,   KC_UP, _______,KC_DLINE, KC_BSPC,
-  XXXXXXX, KC_ELIXIRPIPE,  KC_LARROW,  KC_RARROW,  KC_DOUBLEARROW, KC_LSFT,     KC_RSFT,  KC_LEFT, KC_DOWN, KC_RGHT,  KC_DEL, KC_BSPC,
-  XXXXXXX,XXXXXXX, KC_CUT, KC_COPY,XXXXXXX , KC_PASTE,  XXXXXXX,       XXXXXXX,  KC_PGDN, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX,
-                         _______, _______, _______, _______, _______,       _______, _______, _______, _______, _______
+  _______, _______ ,      _______ ,      _______ ,  _______ ,       _______,                    _______, _______, _______, _______, _______,  _______,
+  KC_PSCR, KC_INS ,       KC_HASHROCKET, KC_MINS,   KC_EQL,         XXXXXXX,                    KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_DLINE, KC_BSPC,
+  XXXXXXX, KC_ELIXIRPIPE, KC_LARROW,     KC_RARROW, KC_DOUBLEARROW, KC_LSFT,                    KC_RSFT, KC_LEFT, KC_DOWN, KC_RGHT, KC_DEL,   XXXXXXX,
+  XXXXXXX, XXXXXXX,       KC_CUT,        KC_COPY,   XXXXXXX ,       KC_PASTE, XXXXXXX, XXXXXXX, KC_PGDN, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX,
+                         _______,        _______,   _______,        _______,  _______,          _______, _______, _______, _______, _______
 ),
 /* ADJUST
  * ,-----------------------------------------.                    ,-----------------------------------------.

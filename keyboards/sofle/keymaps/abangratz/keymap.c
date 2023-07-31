@@ -1,6 +1,7 @@
 #include QMK_KEYBOARD_H
 
 #include "features/caps_word.h"
+#include "features/achordion.h"
 
 enum sofle_layers {
     /* _M_XYZ = Mac Os, _W_XYZ = Win/Linux */
@@ -15,7 +16,6 @@ enum custom_keycodes {
     KC_QWERTY = SAFE_RANGE,
     KC_LSTRT,
     KC_LEND,
-    KC_DLINE,
     KC_RARROW,
     KC_ELIXIRPIPE,
     KC_DOUBLEARROW,
@@ -43,10 +43,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
 [_QWERTY] = LAYOUT(
-  KC_F1,  KC_F2,   KC_F3,   KC_F4,     KC_F5,     KC_F6,                KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,  KC_F12,
-  KC_GRV,   KC_Q,   KC_W,    KC_E,    KC_R,      KC_T,                   KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,  KC_BSPC,
-  KC_SLSH,  KC_A,   KC_S,LT(_ADJUST,KC_D),LT(_LOWER,KC_F),LSFT_T(KC_G),           RSFT_T(KC_H),LT(_LOWER,KC_J),LT(_RAISE,KC_K),    KC_L, KC_SCLN,  KC_QUOT,
-  KC_LBRC,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_MUTE, DT_PRNT  , KC_N,    KC_M, KC_COMM,  KC_DOT, KC_BSLS,  KC_RBRC,
+  KC_F1,    KC_F2,  KC_F3,   KC_F4,           KC_F5,          KC_F6,                   KC_F7,       KC_F8,          KC_F9,          KC_F10, KC_F11,  KC_F12,
+  KC_GRV,   KC_Q,   KC_W,    KC_E,            KC_R,           KC_T,                    KC_Y,        KC_U,           KC_I,           KC_O,   KC_P,    KC_BSPC,
+  KC_SLSH,  KC_A,   KC_S,    LT(_ADJUST,KC_D),LT(_LOWER,KC_F),LSFT_T(KC_G),            RSFT_T(KC_H),LT(_LOWER,KC_J),LT(_RAISE,KC_K),KC_L,   KC_SCLN, KC_QUOT,
+  KC_LBRC,  KC_Z,   KC_X,    KC_C,            KC_V,           KC_B,  KC_MUTE, DT_PRNT, KC_N,        KC_M,           KC_COMM,        KC_DOT, KC_BSLS, KC_RBRC,
   TT(_LOWER), TT(_RAISE),LCTL_T(KC_TAB),LGUI_T(KC_SPC),LALT_T(KC_ESC),RALT_T(KC_ENT),RGUI_T(KC_SPC), RCTL_T(KC_CAPS), KC_MINS, KC_EQL
 ),
 /*
@@ -56,7 +56,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |  `   |   Q  |   W  |   F  |   P  |   B  |                    |   J  |   L  |   U  |   Y  |   ;  | <-   |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |  /   |   A  |LT_A/R|LT_R/S|LT_L/T| LS/G |-------.    ,-------| RS/K |LT_L/N|LT_R/E|LT_A/I|   O  |  '   |
+ * |  /   |LT_A/A|LT_R/R|LT_L/S| LS/T |   G  |-------.    ,-------|   M  | LS/N |LT_L/E|LT_R/I|LT_A/O|  '   |
  * |------+------+------+------+------+------| Mute  |    | DT Pri|------+------+------+------+------+------|
  * |  [   |   Z  |   X  |   C  |   D  |   V  |-------|    |-------|   K  |   H  |   ,  |   .  |   \  |  ]   |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
@@ -66,10 +66,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
 [_COLEMAK] = LAYOUT(
-  KC_F1,    KC_F2,  KC_F3,           KC_F4,          KC_F5,          KC_F6,                KC_F7,       KC_F8,          KC_F9,          KC_F10,           KC_F11,  KC_F12,
-  KC_GRV,   KC_Q,   KC_W,            KC_F,           KC_P,           KC_B,                 KC_J,        KC_L,           KC_U,           KC_Y,             KC_SCLN, KC_BSPC,
-  KC_SLSH,  KC_A,   LT(_ADJUST,KC_R),LT(_RAISE,KC_S),LT(_LOWER,KC_T),LSFT_T(KC_G),         RSFT_T(KC_M),LT(_LOWER,KC_N),LT(_RAISE,KC_E),LT(_ADJUST,KC_I), KC_O,    KC_QUOT,
-  KC_LBRC,  KC_Z,   KC_X,            KC_C,           KC_D,           KC_V,KC_MUTE, DT_PRNT,KC_K,        KC_H,           KC_COMM,        KC_DOT,           KC_BSLS, KC_RBRC,
+  KC_F1,    KC_F2,           KC_F3,           KC_F4,          KC_F5,       KC_F6,                 KC_F7,KC_F8,       KC_F9,          KC_F10,         KC_F11,          KC_F12,
+  KC_GRV,   KC_Q,            KC_W,            KC_F,           KC_P,        KC_B,                  KC_J ,KC_L,        KC_U,           KC_Y,           KC_SCLN,         KC_BSPC,
+  KC_SLSH,  LT(_ADJUST,KC_A),LT(_RAISE,KC_R), LT(_LOWER,KC_S),LSFT_T(KC_T),KC_G,                  KC_M ,RSFT_T(KC_N),LT(_LOWER,KC_E),LT(_RAISE,KC_I),LT(_ADJUST,KC_O),KC_QUOT,
+  KC_LBRC,  KC_Z,            KC_X,            KC_C,           KC_D,        KC_V, KC_MUTE, DT_PRNT,KC_K ,KC_H,        KC_COMM,        KC_DOT,         KC_BSLS,         KC_RBRC,
               TT(_LOWER), TT(_RAISE),LCTL_T(KC_TAB),LGUI_T(KC_SPC),LALT_T(KC_ESC),RALT_T(KC_ENT),RGUI_T(KC_SPC), RCTL_T(KC_CAPS), KC_MINS, KC_EQL
 ),
 /* LOWER
@@ -78,7 +78,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |      |  !   |  @   |  /   |  \   | ~    |                    |      |   7  |   8  |   9  |      |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |  [   |  ]   |  (   |  )   |LShift|-------.    ,-------|RShift|   4  |   5  |   6  |      |      |
+ * |      |  [   |  ]   |  (   | LS/) |      |-------.    ,-------|      | RS/4 |   5  |   6  |      |      |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
  * |      |      |      |      |  *   |      |-------|    |-------|   0  |   1  |   2  |   3  |   .  |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
@@ -87,10 +87,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *            `----------------------------------'           '------''---------------------------'
  */
 [_LOWER] = LAYOUT(
- _______, _______, _______, _______, _______, _______,                    _______, _______, _______, _______,   _______,  _______,
- XXXXXXX, KC_EXLM,   KC_AT, KC_SLSH, KC_BSLS, KC_TILD,                    XXXXXXX,   KC_7 ,   KC_8 ,   KC_9 ,   XXXXXXX,  _______,
- XXXXXXX, KC_LBRC, KC_RBRC, KC_LPRN, KC_RPRN, KC_LSFT,                    KC_RSFT,   KC_4 ,   KC_5 ,   KC_6 ,   XXXXXXX,  XXXXXXX,
- XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_ASTR, XXXXXXX, XXXXXXX, XXXXXXX,  KC_0 ,   KC_1 ,   KC_2 ,   KC_3 ,   KC_DOT ,  XXXXXXX,
+ _______, _______, _______, _______, _______     , _______,                    _______, _______      , _______, _______,   _______,  _______,
+ XXXXXXX, KC_EXLM,   KC_AT, KC_SLSH, KC_BSLS     , KC_TILD,                    XXXXXXX, KC_7         ,   KC_8 ,   KC_9 ,   XXXXXXX,  _______,
+ XXXXXXX, KC_LBRC, KC_RBRC, KC_LPRN, LSFT_T(KC_0), XXXXXXX,                    XXXXXXX, RSFT_T(KC_4) ,   KC_5 ,   KC_6 ,   XXXXXXX,  XXXXXXX,
+ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_ASTR,      XXXXXXX, XXXXXXX, XXXXXXX,  KC_0 ,   KC_1         ,   KC_2 ,   KC_3 ,   KC_DOT ,  XXXXXXX,
                        _______, _______, _______, _______, _______,       _______, _______, _______, _______, _______
 ),
 /* RAISE
@@ -109,9 +109,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_RAISE] = LAYOUT(
   _______, _______ ,      _______ ,      _______ ,  _______ ,       _______,                    _______, _______, _______, _______, _______,  _______,
-  KC_PSCR, KC_INS ,       KC_HASHROCKET, KC_MINS,   KC_EQL,         XXXXXXX,                    KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_DLINE, KC_BSPC,
+  KC_PSCR, KC_INS ,       KC_HASHROCKET, KC_MINS,   KC_EQL,         XXXXXXX,                    KC_PGUP, KC_HOME, KC_UP,   KC_END,  XXXXXXX, KC_BSPC,
   XXXXXXX, KC_ELIXIRPIPE, KC_LARROW,     KC_RARROW, KC_DOUBLEARROW, KC_LSFT,                    KC_RSFT, KC_LEFT, KC_DOWN, KC_RGHT, KC_DEL,   XXXXXXX,
-  XXXXXXX, XXXXXXX,       KC_CUT,        KC_COPY,   XXXXXXX ,       KC_PASTE, XXXXXXX, XXXXXXX, KC_PGDN, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX,
+  XXXXXXX, XXXXXXX,       XXXXXXX,       XXXXXXX,   XXXXXXX ,       XXXXXXX, XXXXXXX, XXXXXXX, KC_PGDN, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX,
                          _______,        _______,   _______,        _______,  _______,          _______, _______, _______, _______, _______
 ),
 /* ADJUST
@@ -130,7 +130,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
   [_ADJUST] = LAYOUT(
   XXXXXXX , XXXXXXX,  XXXXXXX ,  XXXXXXX , XXXXXXX, XXXXXXX,                     KC_COLEMAK, KC_QWERTY, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-  RESET  , XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,                     G(KC_PGUP), G(KC_PGDN), G(S(KC_LEFT)), G(S(KC_RGHT)), XXXXXXX, XXXXXXX,
+  XXXXXXX, XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,                     G(KC_PGUP), G(KC_PGDN), G(S(KC_LEFT)), G(S(KC_RGHT)), XXXXXXX, XXXXXXX,
   XXXXXXX , XXXXXXX,XXXXXXX, XXXXXXX,    XXXXXXX,  XXXXXXX,                     G(C(KC_J)), G(KC_LEFT), G(KC_O), G(KC_RGHT), XXXXXXX, XXXXXXX,
   XXXXXXX , XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX,  XXXXXXX, XXXXXXX,     XXXXXXX, G(C(KC_L)), KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX,
                    _______, _______, _______, _______, _______,     _______, _______, _______, _______, _______
@@ -211,9 +211,29 @@ bool oled_task_user(void) {
 
 #endif
 
+bool achordion_chord(uint16_t tap_hold_keycode,
+                     keyrecord_t* tap_hold_record,
+                     uint16_t other_keycode,
+                     keyrecord_t* other_record) {
+    switch (tap_hold_keycode) {
+      case KC_I:
+        if (other_keycode == KC_E) { return true; }
+        if (other_keycode == KC_N) { return true; }
+        break;
+    }
+    return achordion_opposite_hands(tap_hold_record, other_record);
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (!process_achordion(keycode, record)) { return false; }
     if (!process_caps_word(keycode, record)) { return false; }
     switch (keycode) {
+    case LCTL_T(KC_RPRN):
+        if (record->tap.count && record->event.pressed) {
+            tap_code16(KC_RPRN);
+            return false;
+    }
+        return false;
     case KC_QWERTY:
         if (record->event.pressed) {
             set_single_persistent_default_layer(_QWERTY);
@@ -251,6 +271,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         break;
     }
     return true;
+}
+
+void matrix_scan_user(void) {
+    achordion_task();
 }
 
 #ifdef ENCODER_ENABLE

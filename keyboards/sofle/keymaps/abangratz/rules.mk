@@ -12,3 +12,4 @@ DYNAMIC_TAPPING_TERM_ENABLE = yes
 # RGBLIGHT_ENABLE = yes
 # RGBLIGHT_DRIVER = WS2812
 SRC += features/caps_word.c
+SRC += features/achordion.c

@@ -1,3 +1,19 @@
+/*
+    Author: Anton 'tony' Bangratz
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+*/
+
 #include QMK_KEYBOARD_H
 
 #include "features/caps_word.h"
@@ -56,21 +72,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |  `   |   Q  |   W  |   F  |   P  |   B  |                    |   J  |   L  |   U  |   Y  |   ;  | <-   |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |  /   |LT_A/A|LT_R/R|LT_L/S| LS/T |   G  |-------.    ,-------|   M  | LS/N |LT_L/E|LT_R/I|LT_A/O|  '   |
+ * | TT A |   A  |LT_R/R|LT_L/S| LS/T |   G  |-------.    ,-------|   M  | LS/N |LT_L/E|LT_R/I|   O  |  '   |
  * |------+------+------+------+------+------| Mute  |    | DT Pri|------+------+------+------+------+------|
- * |  [   |   Z  |   X  |   C  |   D  |   V  |-------|    |-------|   K  |   H  |   ,  |   .  |   \  |  ]   |
+ * |  [   |   Z  |   X  |   C  |   D  |   V  |-------|    |-------|   K  |   H  |   ,  |   .  | TT A |  ]   |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *            | TT L | TT R | LC_t |LG_t  | /LA_t   /       \ RA_t \  |RG_t  | RC_t |  -    |  =   |
+ *            | TT L | TT R | LC_t |LG_t  | /LA_t   /       \ RA_t \  |RG_t  | RC_t |  TT A |  =   |
  *            |      |      | Tab  |Spc   |/  Esc  /         \Enter \ |Spc   | CAPS |       |      |
  *            `----------------------------------'           '------''---------------------------'
  */
 
 [_COLEMAK] = LAYOUT(
-  KC_F1,    KC_F2,           KC_F3,           KC_F4,          KC_F5,       KC_F6,                 KC_F7,KC_F8,       KC_F9,          KC_F10,         KC_F11,          KC_F12,
-  KC_GRV,   KC_Q,            KC_W,            KC_F,           KC_P,        KC_B,                  KC_J ,KC_L,        KC_U,           KC_Y,           KC_SCLN,         KC_BSPC,
-  KC_SLSH,  LT(_ADJUST,KC_A),LT(_RAISE,KC_R), LT(_LOWER,KC_S),LSFT_T(KC_T),KC_G,                  KC_M ,RSFT_T(KC_N),LT(_LOWER,KC_E),LT(_RAISE,KC_I),LT(_ADJUST,KC_O),KC_QUOT,
-  KC_LBRC,  KC_Z,            KC_X,            KC_C,           KC_D,        KC_V, KC_MUTE, DT_PRNT,KC_K ,KC_H,        KC_COMM,        KC_DOT,         KC_BSLS,         KC_RBRC,
-              TT(_LOWER), TT(_RAISE),LCTL_T(KC_TAB),LGUI_T(KC_SPC),LALT_T(KC_ESC),RALT_T(KC_ENT),RGUI_T(KC_SPC), RCTL_T(KC_CAPS), KC_MINS, KC_EQL
+  KC_F1,      KC_F2,           KC_F3,           KC_F4,          KC_F5,       KC_F6,                 KC_F7,KC_F8,       KC_F9,          KC_F10,         KC_F11,          KC_F12,
+  KC_GRV,     KC_Q,            KC_W,            KC_F,           KC_P,        KC_B,                  KC_J ,KC_L,        KC_U,           KC_Y,           KC_SCLN,         KC_BSPC,
+  TT(_ADJUST),KC_A,            LT(_RAISE,KC_R), LT(_LOWER,KC_S),LSFT_T(KC_T),KC_G,                  KC_M ,RSFT_T(KC_N),LT(_LOWER,KC_E),LT(_RAISE,KC_I),KC_O,            KC_QUOT,
+  KC_LBRC,    KC_Z,            KC_X,            KC_C,           KC_D,        KC_V, KC_MUTE, DT_PRNT,KC_K ,KC_H,        KC_COMM,        KC_DOT,        ,TT(_ADJUST),     KC_RBRC,
+              TT(_LOWER), TT(_RAISE),LCTL_T(KC_TAB),LGUI_T(KC_SPC),LALT_T(KC_ESC),RALT_T(KC_ENT),RGUI_T(KC_SPC), RCTL_T(KC_CAPS), TT(_ADJUST), KC_EQL
 ),
 /* LOWER
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -114,25 +130,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   XXXXXXX, XXXXXXX,       XXXXXXX,       XXXXXXX,   XXXXXXX ,       XXXXXXX, XXXXXXX, XXXXXXX, KC_PGDN, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX,
                          _______,        _______,   _______,        _______,  _______,          _______, _______, _______, _______, _______
 ),
-/* ADJUST
- * ,-----------------------------------------.                    ,-----------------------------------------.
- * |      |      |      |      |      |      |                    |COLEMAK|QWERTY|      |      |      |      |
- * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |RESET |      |      |      |      |      |                    |G_PGUP|G_PGDN|G_S_LE|G_S_RI|      |      |
- * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |      |      |      |      |      |-------.    ,-------| G_C_J|G_LEFT| G_O  |G_RGHT|      |      |
- * |------+------+------+------+------+------|  MUTE |    |       |------+------+------+------+------+------|
- * |      |      |      |      |      |      |-------|    |-------| G_C_L| PREV | PLAY | NEXT |      |      |
- * `-----------------------------------------/       /     \      \-----------------------------------------'
+/*
+ * ,-----------------------------------------.                    ,-------------------------------------------------------------.
+ * |      |      |      |      |      |      |                    | COLEMAK |  QWERTY   |         |           |         |         |
+ * |------+------+------+------+------+------|                    |---------+-----------+---------+-----------+---------+---------|
+ * |RESET |      |      |      |      |      |                    | KC_WH_U | KC_MS_BTN1| KC_MS_U | KC_MS_BTN2|         |         |
+ * |------+------+------+------+------+------|                    |---------+-----------+---------+-----------+---------+---------|
+ * |      |      |      |      |      |      |-------.    ,-------| KC_BTN3 | KC_MS_L   | KC_MS_D | KC_MS_R   |         |         |
+ * |------+------+------+------+------+------|  MUTE |    |       |---------+-----------+---------+-----------+---------+---------|
+ * |      |      |      |      |      |      |-------|    |-------| KC_WH_D | PREV      | PLAY    | NEXT      |         |         |
+ * `-----------------------------------------/       /     \      \---------------------------------------------------------------'
  *            | TT L | TT R | LC_t |LG_t  | /LA_t   /       \ RA_t \  |RG_t  | RC_t |  -    |  =   |
  *            |      |      | Tab  |Spc   |/  Esc  /         \Enter \ |Spc   | CAPS |       |      |
  *            `-----------------------------------'           '------''----------------------------'
  */
   [_ADJUST] = LAYOUT(
-  XXXXXXX , XXXXXXX,  XXXXXXX ,  XXXXXXX , XXXXXXX, XXXXXXX,                     KC_COLEMAK, KC_QWERTY, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-  XXXXXXX, XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,                     G(KC_PGUP), G(KC_PGDN), G(S(KC_LEFT)), G(S(KC_RGHT)), XXXXXXX, XXXXXXX,
-  XXXXXXX , XXXXXXX,XXXXXXX, XXXXXXX,    XXXXXXX,  XXXXXXX,                     G(C(KC_J)), G(KC_LEFT), G(KC_O), G(KC_RGHT), XXXXXXX, XXXXXXX,
-  XXXXXXX , XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX,  XXXXXXX, XXXXXXX,     XXXXXXX, G(C(KC_L)), KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX,
+  XXXXXXX , XXXXXXX, XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX,                       KC_COLEMAK, KC_QWERTY , XXXXXXX , XXXXXXX , XXXXXXX, XXXXXXX,
+  XXXXXXX , XXXXXXX, XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX,                       KC_WH_U   , KC_BTN1   , KC_MS_U , KC_BTN2 , XXXXXXX, XXXXXXX,
+  XXXXXXX , XXXXXXX, XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX,                       KC_BTN3   , KC_MS_L   , KC_MS_D , KC_MS_R , XXXXXXX, XXXXXXX,
+  XXXXXXX , XXXXXXX, XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX, XXXXXXX,     XXXXXXX, KC_WH_D   , KC_MPRV   , KC_MPLY , KC_MNXT , XXXXXXX, XXXXXXX,
                    _______, _______, _______, _______, _______,     _______, _______, _______, _______, _______
   )
 };
@@ -228,9 +244,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (!process_achordion(keycode, record)) { return false; }
     if (!process_caps_word(keycode, record)) { return false; }
     switch (keycode) {
-    case LCTL_T(KC_RPRN):
+    case LCTL_T(KC_0):
         if (record->tap.count && record->event.pressed) {
-            tap_code16(KC_RPRN);
+            SEND_STRING(")");
             return false;
     }
         return false;

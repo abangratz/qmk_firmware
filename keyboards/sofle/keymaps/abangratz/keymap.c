@@ -16,7 +16,6 @@
 
 #include QMK_KEYBOARD_H
 
-#include "features/caps_word.h"
 #include "features/achordion.h"
 
 enum sofle_layers {
@@ -72,7 +71,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |  `   |   Q  |   W  |   F  |   P  |   B  |                    |   J  |   L  |   U  |   Y  |   ;  | <-   |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | TT A |   A  |LT_R/R|LT_L/S| LS/T |   G  |-------.    ,-------|   M  | LS/N |LT_L/E|LT_R/I|   O  |  '   |
+ * |  /   |LT_A/A|LT_R/R|LT_L/S| LS/T |   G  |-------.    ,-------|   M  | LS/N |LT_L/E|LT_R/I|LT_A/O|  '   |
  * |------+------+------+------+------+------| Mute  |    | DT Pri|------+------+------+------+------+------|
  * |  [   |   Z  |   X  |   C  |   D  |   V  |-------|    |-------|   K  |   H  |   ,  |   .  | TT A |  ]   |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
@@ -82,11 +81,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
 [_COLEMAK] = LAYOUT(
-  KC_F1,      KC_F2,           KC_F3,           KC_F4,          KC_F5,       KC_F6,                 KC_F7,KC_F8,       KC_F9,          KC_F10,         KC_F11,          KC_F12,
-  KC_GRV,     KC_Q,            KC_W,            KC_F,           KC_P,        KC_B,                  KC_J ,KC_L,        KC_U,           KC_Y,           KC_SCLN,         KC_BSPC,
-  TT(_ADJUST),KC_A,            LT(_RAISE,KC_R), LT(_LOWER,KC_S),LSFT_T(KC_T),KC_G,                  KC_M ,RSFT_T(KC_N),LT(_LOWER,KC_E),LT(_RAISE,KC_I),KC_O,            KC_QUOT,
-  KC_LBRC,    KC_Z,            KC_X,            KC_C,           KC_D,        KC_V, KC_MUTE, DT_PRNT,KC_K ,KC_H,        KC_COMM,        KC_DOT,        ,TT(_ADJUST),     KC_RBRC,
-              TT(_LOWER), TT(_RAISE),LCTL_T(KC_TAB),LGUI_T(KC_SPC),LALT_T(KC_ESC),RALT_T(KC_ENT),RGUI_T(KC_SPC), RCTL_T(KC_CAPS), TT(_ADJUST), KC_EQL
+  KC_F1,    KC_F2,           KC_F3,           KC_F4,          KC_F5,       KC_F6,                 KC_F7,KC_F8,       KC_F9,          KC_F10,         KC_F11,          KC_F12,
+  KC_GRV,   KC_Q,            KC_W,            KC_F,           KC_P,        KC_B,                  KC_J ,KC_L,        KC_U,           KC_Y,           KC_SCLN,         KC_BSPC,
+  KC_SLSH,  LT(_ADJUST,KC_A),LT(_RAISE,KC_R), LT(_LOWER,KC_S),LSFT_T(KC_T),KC_G,                  KC_M ,RSFT_T(KC_N),LT(_LOWER,KC_E),LT(_RAISE,KC_I),LT(_ADJUST,KC_O),KC_QUOT,
+  KC_LBRC,  KC_Z,            KC_X,            KC_C,           KC_D,        KC_V, KC_MUTE, DT_PRNT,KC_K ,KC_H,        KC_COMM,        KC_DOT,         KC_BSLS,         KC_RBRC,
+              TT(_LOWER), TT(_RAISE),LCTL_T(KC_TAB),LGUI_T(KC_SPC),LALT_T(KC_ESC),RALT_T(KC_ENT),RGUI_T(KC_SPC), RCTL_T(KC_CAPS), KC_MINS, KC_EQL
 ),
 /* LOWER
  * ,-----------------------------------------.                    ,-----------------------------------------.

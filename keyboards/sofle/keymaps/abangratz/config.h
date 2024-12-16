@@ -19,6 +19,7 @@
 #define TAPPING_FORCE_HOLD_PER_KEY
 /* #define TAPPING_TOGGLE 2 */
 #define BOTH_SHIFTS_TURNS_ON_CAPS_WORD
+#define ACHORDION_STREAK_TIMEOUT
 
 /* The way how "handedness" is decided (which half is which),
 see https://docs.qmk.fm/#/feature_split_keyboard?id=setting-handedness
